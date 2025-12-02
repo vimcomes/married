@@ -6,7 +6,7 @@
 
 namespace married::ui {
 
-void renderHeader(int attempts, int matches, int tickMs);
+void renderHeader(const married::History& history, int tickMs);
 void renderProgress(int matches);
 void renderCurrentDesires(const std::string& d1, const std::string& d2);
 void renderStatusLine();

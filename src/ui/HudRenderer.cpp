@@ -15,10 +15,22 @@ void drawFrameBorder() { drawBorder(kScreenWidth, kScreenHeight); }
 
 }  // namespace
 
-void renderHeader(int attempts, int matches, int tickMs) {
-    writeAt(1, 2, "Att " + std::to_string(attempts) + " | Match " + std::to_string(matches) + "/" +
-                       std::to_string(kTargetMatches) + " | Tick " + std::to_string(tickMs) + "ms");
-    writeAt(2, 2, "Fastest - | Slowest - | Showing " + std::to_string(kRecentLimit));
+std::string formatTimingField(const std::string& label, int valueMs, bool available) {
+    if (!available) return label + " -";
+    return label + " " + std::to_string(valueMs) + "ms";
+}
+
+void renderHeader(const married::History& history, int tickMs) {
+    writeAt(1, 2, "Att " + std::to_string(history.attemptsCount()) + " | Match " +
+                       std::to_string(history.matchesCount()) + "/" + std::to_string(kTargetMatches) +
+                       " | Tick " + std::to_string(tickMs) + "ms");
+
+    const bool hasTiming = history.hasTiming();
+    const std::string fastest = formatTimingField("Fastest", history.fastestMs(), hasTiming);
+    const std::string slowest = formatTimingField("Slowest", history.slowestMs(), hasTiming);
+    const std::string average = formatTimingField("Avg", history.averageMs(), hasTiming);
+    writeAt(2, 2, fastest + " | " + slowest + " | " + average + " | Showing " +
+                      std::to_string(kRecentLimit));
 }
 
 void renderProgress(int matches) {
@@ -48,7 +60,7 @@ void renderStatusLine() { writeAt(kScreenHeight - 2, 2, "[q] quit"); }
 void renderFrame(const married::History& history, const std::string& d1, const std::string& d2, int tickMs) {
     clearScreen();
     drawFrameBorder();
-    renderHeader(history.attemptsCount(), history.matchesCount(), tickMs);
+    renderHeader(history, tickMs);
     renderProgress(history.matchesCount());
     renderCurrentDesires(d1, d2);
     renderAttemptsTable(history.attempts());

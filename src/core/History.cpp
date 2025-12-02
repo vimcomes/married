@@ -9,6 +9,21 @@ void History::addAttempt(const std::string& d1, const std::string& d2, bool matc
     if (match && matchesCount_ < kTargetMatches) {
         ++matchesCount_;
         ++matchedCounts_[d1];
+
+        const auto now = std::chrono::steady_clock::now();
+        const auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(
+            now - (lastMatchTime_.has_value() ? *lastMatchTime_ : startTime_));
+        lastMatchTime_ = now;
+
+        const int intervalMs = static_cast<int>(duration.count());
+        if (matchIntervals_ == 0) {
+            minMatchMs_ = maxMatchMs_ = intervalMs;
+        } else {
+            minMatchMs_ = std::min(minMatchMs_, intervalMs);
+            maxMatchMs_ = std::max(maxMatchMs_, intervalMs);
+        }
+        totalMatchMs_ += intervalMs;
+        ++matchIntervals_;
     }
 
     attempts_.push_back(Attempt{attemptsCount_, d1, d2, match});
