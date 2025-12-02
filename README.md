@@ -21,7 +21,7 @@ Text-mode simulator illustrating multithreading in C++20: two threads (Marina an
 
 The architecture separates simulation logic from TUI rendering, keeping the project modular, easy to maintain, and extendable.
 
-## Screenshot
+### Screenshot
 ![Simulator screen](docs/screenshot.png)
 
 ## What it does
