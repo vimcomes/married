@@ -1,6 +1,6 @@
 # Desire Match Simulator (ncurses, C++20)
 
-Text-mode simulator where two threads (Marina and Roman) randomly generate desires until 10 matches are found. UI is fixed to 80x24 and rendered with ncurses.
+Text-mode simulator illustrating multithreading in C++20: two threads (Marina and Roman) randomly generate desires until 10 matches are found. UI is fixed to 80x24 and rendered with ncurses.
 
 ## What it does
 - Two `std::jthread` workers generate random desires from a 150-item list.
