@@ -1,5 +1,6 @@
 #include "ui/HudRenderer.hpp"
 
+#include <format>
 #include <string>
 #include <vector>
 
@@ -15,9 +16,14 @@ void drawFrameBorder() { drawBorder(kScreenWidth, kScreenHeight); }
 
 }  // namespace
 
+std::string formatSeconds(int valueMs) {
+    const double seconds = static_cast<double>(valueMs) / 1000.0;
+    return std::format("{:.1f}s", seconds);
+}
+
 std::string formatTimingField(const std::string& label, int valueMs, bool available) {
     if (!available) return label + " -";
-    return label + " " + std::to_string(valueMs) + "ms";
+    return label + " " + formatSeconds(valueMs);
 }
 
 void renderHeader(const married::History& history, int tickMs) {
