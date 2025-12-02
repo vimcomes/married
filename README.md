@@ -22,25 +22,7 @@ Text-mode simulator illustrating multithreading in C++20: two threads (Marina an
 The architecture separates simulation logic from TUI rendering, keeping the project modular, easy to maintain, and extendable.
 
 ## Screenshot (80x24 layout)
-```
-+------------------------------------------------------------------------------+
-| Att 12 | Match 3/10 | Tick 500ms                                            |
-| Fastest 0.5s | Slowest 2.3s | Avg 1.4s | Showing 8                          |
-| Progress: [====              ]                                               |
-|                                                                              |
-| Current desires:                                                             |
-|  Marina  to travel the world          | Roman    to travel the world         |
-|                                                                              |
-| No.  Marina                         Roman                          Match     |
-| --------------------------------------------------------------------------   |
-| 1    to travel the world            to help people                YES        |
-| 2    to become a programmer         to become a programmer        YES        |
-| 3    to write a book                to start a business           no         |
-| ...                                                                       
-|                                                                              |
-| [q] quit                                                                     |
-+------------------------------------------------------------------------------+
-```
+![Simulator screen](docs/screenshot.png)
 
 ## What it does
 - Two `std::jthread` workers generate random desires from a 150-item list.
