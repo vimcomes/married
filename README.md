@@ -7,6 +7,41 @@ Text-mode simulator illustrating multithreading in C++20: two threads (Marina an
 - `src/core`: shared types, desire list, and history tracking.
 - `src/ui`: ncurses-based terminal helpers plus HUD/table renderers.
 
+## Architecture
+- `app/DesireSimulator` — the main application loop. Creates two threads (Marina and Roman), manages shared state, updates the history of attempts, and calls UI rendering functions.
+- `core/` — logic and data:
+  - `DesireList` – random desire generation;
+  - `History` – attempt storage and match counting;
+  - `Types` – shared constants and data structures (Attempt, screen dimensions, limits, etc.).
+- `ui/` — ncurses-based text interface layer:
+  - `Terminal` – screen clearing, cursor movement, and color handling;
+  - `Layout` – text layout and position helpers;
+  - `TableRenderer` – rendering of the attempt table with match highlighting;
+  - `HudRenderer` – header, current desires, progress bar, and final summary screen.
+
+The architecture separates simulation logic from TUI rendering, keeping the project modular, easy to maintain, and extendable.
+
+## Screenshot (80x24 layout)
+```
++------------------------------------------------------------------------------+
+| Att 12 | Match 3/10 | Tick 500ms                                            |
+| Fastest 0.5s | Slowest 2.3s | Avg 1.4s | Showing 8                          |
+| Progress: [====              ]                                               |
+|                                                                              |
+| Current desires:                                                             |
+|  Marina  to travel the world          | Roman    to travel the world         |
+|                                                                              |
+| No.  Marina                         Roman                          Match     |
+| --------------------------------------------------------------------------   |
+| 1    to travel the world            to help people                YES        |
+| 2    to become a programmer         to become a programmer        YES        |
+| 3    to write a book                to start a business           no         |
+| ...                                                                       
+|                                                                              |
+| [q] quit                                                                     |
++------------------------------------------------------------------------------+
+```
+
 ## What it does
 - Two `std::jthread` workers generate random desires from a 150-item list.
 - Main loop tracks attempts, dynamic tick (faster on no-match, reset on match), shows a colored HUD, table of recent attempts, and a progress bar.

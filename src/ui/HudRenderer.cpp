@@ -93,10 +93,10 @@ void renderSummary(const married::History& history) {
     }
 
     const char* art[] = {
-        "  O      O  ",
+        "  O     O   ",
         " /|\\__/|\\ ",
         " / \\  / \\ ",
-        "  |    |   ",
+        "  |   |    ",
         " / \\  / \\ "
     };
     int artStart = kScreenHeight - 8;
