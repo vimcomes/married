@@ -93,11 +93,12 @@ void renderSummary(const married::History& history) {
     }
 
     const char* art[] = {
-        "  O        O",
-        " /|\\     /|\\",
-        " / \\     / \\",
-        "  |        |",
-        " / \\     / \\"};
+        "  O      O  ",
+        " /|\\__/|\\ ",
+        " / \\  / \\ ",
+        "  |    |   ",
+        " / \\  / \\ "
+    };
     int artStart = kScreenHeight - 8;
     for (int i = 0; i < 5 && artStart + i < kScreenHeight - 2; ++i) {
         writeAt(artStart + i, 2, art[i]);

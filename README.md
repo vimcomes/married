@@ -10,6 +10,7 @@ Text-mode simulator illustrating multithreading in C++20: two threads (Marina an
 ## What it does
 - Two `std::jthread` workers generate random desires from a 150-item list.
 - Main loop tracks attempts, dynamic tick (faster on no-match, reset on match), shows a colored HUD, table of recent attempts, and a progress bar.
+- HUD now displays Fastest/Slowest/Avg time between matches (seconds, 1 decimal) to give pacing context.
 - On 10 matches, shows a summary with top repeated desires.
 
 ## Build & Run (Linux)
