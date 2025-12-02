@@ -3,6 +3,8 @@
 #include <chrono>
 #include <string>
 
+namespace married {
+
 inline constexpr int kScreenWidth = 80;
 inline constexpr int kScreenHeight = 24;
 inline constexpr std::chrono::milliseconds kGeneratorTick{500};
@@ -16,3 +18,5 @@ struct Attempt {
     std::string d2;
     bool match{};
 };
+
+}  // namespace married

@@ -11,12 +11,13 @@ find_package(Threads REQUIRED)
 
 add_executable(desire_simulator
     src/main.cpp
-    src/core/Human.cpp
-    src/core/SharedState.cpp
-    src/core/DesireEngine.cpp
-    src/core/Input.cpp
-    src/ui/Ui.cpp
-    src/app/App.cpp
+    src/app/DesireSimulator.cpp
+    src/core/DesireList.cpp
+    src/core/History.cpp
+    src/ui/Terminal.cpp
+    src/ui/Layout.cpp
+    src/ui/TableRenderer.cpp
+    src/ui/HudRenderer.cpp
 )
 
 target_link_libraries(desire_simulator PRIVATE ${CURSES_LIBRARIES} Threads::Threads)

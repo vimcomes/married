@@ -2,6 +2,11 @@
 
 Text-mode simulator illustrating multithreading in C++20: two threads (Marina and Roman) randomly generate desires until 10 matches are found. UI is fixed to 80x24 and rendered with ncurses.
 
+## Project layout
+- `src/app`: simulation orchestrator (`DesireSimulator`).
+- `src/core`: shared types, desire list, and history tracking.
+- `src/ui`: ncurses-based terminal helpers plus HUD/table renderers.
+
 ## What it does
 - Two `std::jthread` workers generate random desires from a 150-item list.
 - Main loop tracks attempts, dynamic tick (faster on no-match, reset on match), shows a colored HUD, table of recent attempts, and a progress bar.
