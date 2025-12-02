@@ -1,12 +1,7 @@
-#include "app/App.h"
-#include "ui/Ui.h"
+#include "app/DesireSimulator.hpp"
 
 int main() {
-    init_ncurses();
-    {
-        App app;
-        app.run();
-    }
-    shutdown_ncurses();
+    married::DesireSimulator sim;
+    sim.run();
     return 0;
 }

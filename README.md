@@ -1,6 +1,6 @@
-# Desire Match Simulator (ncurses, C++20)
+# Desire Match Simulator (C++20)
 
-Text-mode simulator illustrating multithreading in C++20: two threads (Marina and Roman) randomly generate desires until 10 matches are found. UI is fixed to 80x24 and rendered with ncurses.
+Text-mode simulator illustrating multithreading in C++20: two threads (Marina and Roman) randomly generate desires until 10 matches are found. UI is fixed to 80x24 and rendered directly with ANSI/WinAPI terminal control (no ncurses dependency).
 
 ## What it does
 - Two `std::jthread` workers generate random desires from a 150-item list.
@@ -15,9 +15,8 @@ cmake --build build
 ```
 
 ## Windows notes
-- The code uses `ncurses`. On Windows, build with a compatible curses library (e.g., PDCurses) and point CMake to it (`-DCURSES_LIBRARY` / `-DCURSES_INCLUDE_PATH`), or use WSL where ncurses is available by default.
-- Visual C++ is not supported in the current CMake setup; prefer MinGW or WSL for a smoother build.
+- Uses ANSI escape sequences; on modern Windows terminals this works when virtual terminal processing is enabled (done automatically at startup).
+- Prefer MinGW/WSL; Visual C++ is not targeted.
 
 ## Key dependencies
 - C++20 compiler, CMake ≥3.20
-- ncurses (or compatible curses implementation)

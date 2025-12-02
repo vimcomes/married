@@ -1,9 +1,10 @@
-#include "core/Human.h"
+#include "core/DesireList.hpp"
 
 #include <random>
-#include <utility>
+#include <string>
 #include <vector>
 
+namespace married {
 namespace {
 const std::vector<std::string> kDesires = {
     "to become a programmer",        "to help people",
@@ -91,12 +92,12 @@ const std::vector<std::string> kDesires = {
     "to mine an asteroid",           "to terraform Mars",
     "to be a mythbuster",            "to design playgrounds",
     "to engineer prosthetics",       "to build exoskeletons"};
-} // namespace
+}  // namespace
 
-Human::Human(std::string name) : name(std::move(name)) {}
-
-std::string random_desire() {
+std::string randomDesire() {
     thread_local std::mt19937 gen{std::random_device{}()};
     std::uniform_int_distribution<std::size_t> dist(0, kDesires.size() - 1);
     return kDesires[dist(gen)];
 }
+
+}  // namespace married
